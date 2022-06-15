@@ -1,0 +1,59 @@
+#fullBody{
+    display: flex;
+    flex-direction: row;
+}
+
+#menu{
+    width: 20%;
+    background-color: rgb(39, 39, 85);
+    color: white;
+    min-height: 100vh;
+}
+
+#menuTitle{
+    width: 100%;
+    height: 100px;
+}
+
+#user{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+}
+
+#avatar{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#avatarImg{
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+}
+#greetingDiv{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+}
+#greeting{
+    height: 50%;
+    display: flex;
+    align-items: flex-end;
+    padding-left: 2%;
+}
+#username{
+    height: 50%;
+    display: flex;
+    align-items: flex-start;
+    padding-left: 2%;
+}
+
+#main{
+    padding-left: 10px;
+}
