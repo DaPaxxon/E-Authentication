@@ -23,19 +23,19 @@
 }
 
 #avatar{
-    width: 30%;
+    width: 20%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 #avatarImg{
-    width: 80px;
-    height: 80px;
-    border-radius: 80px;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
 }
 #greetingDiv{
-    width: 70%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -54,6 +54,75 @@
     padding-left: 2%;
 }
 
+
+.navigation{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+}
+.aNavigationMenu{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+}
+.aNavigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.navigationIcon{
+    width: 20%;
+}
+.navigationText{
+    width: 60%;
+}
+.navigationArrow{
+    cursor: pointer;
+}
+.navDownArrow{
+    display: none;
+}
+.menuList{
+    display: none;
+    flex-direction: column;
+}
+.aMenu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 25px;
+    padding: 2px;
+    box-sizing: border-box;
+}
+.menuIcon{
+    width: 20%;
+    margin-left: 20%;
+}
+.menuText{
+    width: 80%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #main{
     padding-left: 10px;
 }
+
