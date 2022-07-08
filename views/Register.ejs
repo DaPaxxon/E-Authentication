@@ -16,7 +16,11 @@
             <h1>New Registration</h1>
             <div class="mainContent">
                 <h2>Enter New User Details</h2>
-                <form class="form">
+                <form class="form" action="/register" method="post">
+                    <div class="inputDiv">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" name="fullname" placeholder="Full name" class="input">
+                    </div>
                     <div class="inputDiv">
                         <label for="username">Username</label>
                         <input type="text" name="username" placeholder="Username" class="input">
@@ -26,8 +30,8 @@
                         <input type="text" name="email" placeholder="Enter Username" class="input">
                     </div>
                     <div class="inputDiv">
-                        <label for="mobileno">Mobile No.</label>
-                        <input type="text" name="mobileno" placeholder="Enter Mobile No." class="input">
+                        <label for="phone">Mobile No.</label>
+                        <input type="text" name="phone" placeholder="Enter Mobile No." class="input">
                     </div>
                     <div class="inputDiv">
                         <label for="password">Password</label>
@@ -35,7 +39,7 @@
                     </div>
                     <div class="inputDiv">
                         <label for="confpassword">Confirm Password</label>
-                        <input type="text" name="confpassword" placeholder="Enter Password Again" class="input">
+                        <input type="text" name="confPassword" placeholder="Enter Password Again" class="input">
                     </div>
                     <button class="submit">Register</button>
                 </form>

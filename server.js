@@ -1,8 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const path=require("path");
-
+const path = require("path");
+const bodyParser = require("body-parser");
 
 const session=require("express-session");
 const mongoose=require("mongoose");
@@ -28,7 +28,7 @@ mongoose.connect(mongoUrl,
     })
     .catch(err=>console.log(err));
 
-let connection=mongoose.connection;
+
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -51,7 +51,12 @@ app.set("view engine", "ejs");
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
 const pagesRoute = require("./routes/pages.routes");
+const authRoute = require("./routes/auth.routes");
 
 
 app.use("/", pagesRoute)
+app.use("/", authRoute)
