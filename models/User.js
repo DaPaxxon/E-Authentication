@@ -1,4 +1,5 @@
-const mongoose=require("mongoose")
+const mongoose = require("mongoose");
+const Joi = require("joi");
 
 const Schema=mongoose.Schema
 
@@ -29,4 +30,20 @@ const userSchema = new Schema({
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+const validateUser = (user) => {
+    const schema = Joi.object({
+      email: Joi.string().email({ minDomainSegments: 2}).min(5).max(500).required().label("Email is empty or invalid"),
+      username: Joi.string().min(2).required().label("Username is empty or has less than 2 characters"),
+      fullname: Joi.string().min(2).required().label("First name is empty or has less than 2 characters"),
+      phone: Joi.string().required().label("Please provide phone number"),
+      password: Joi.string().min(8).required().label("Password must be atleast 8 characters"),
+      confPassword: Joi.string().min(8).required().label("Password must be atleast 8 characters"),
+    })
+    return schema.validate(user)
+}
+
+
+module.exports = {
+    User,
+    validateUser
+};
