@@ -14,6 +14,11 @@ const registerPage=(req, res) => {
 }
 
 
+const verifyOtpPage=(req, res) => {
+    res.status(200).render("VerifyOtp")
+}
+
+
 const dashboardPage=(req, res) => {
     res.status(200).render("Dashboard")
 }
@@ -22,5 +27,6 @@ module.exports = {
     homepage,
     loginPage,
     registerPage,
+    verifyOtpPage,
     dashboardPage
 }

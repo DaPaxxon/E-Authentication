@@ -1,3 +1,7 @@
+body{
+    background-color: rgb(236, 234, 234);
+}
+
 #main{
     padding-left: 10px;
     width: 80%;
@@ -30,7 +34,7 @@ label{
     width: 50%;
 }
 .submit{
-    background-color: rgb(0, 183, 255);
+    background-color: rgb(4, 173, 80);
     padding: 10px;
     box-sizing: border-box;
     width: 30%;
