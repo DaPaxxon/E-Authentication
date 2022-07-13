@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 
-const Schema = mongooseSchema
+const Schema = mongoose.Schema;
 
 const otpSchema = new Schema({
     otp: {
@@ -8,11 +8,16 @@ const otpSchema = new Schema({
         required: [true, "Please provide otp"],
         unique: [true, "Otp already exists"],
     },
-    username: {
+    email: {
         type: String,
-        required: [true, "Please provide username"],
-        unique: [true, "Username already has OTP"]
-    }
+        required: [true, "Please provide email"],
+        unique: [true, "email already has OTP"]
+    },
+    userId: {
+        type: String,
+        required: [true, "Please provide user id"],
+        unique: [true, "id already has OTP"]
+    },
 }, {timestamps: true})
 
 const Otp = mongoose.model("Otp", otpSchema);

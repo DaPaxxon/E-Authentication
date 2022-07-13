@@ -14,11 +14,11 @@
         <%-include("./partials/menu.ejs")%>
         <div id="main">
             <div class="mainContent">
-                <h2>LOGIN</h2>
-                <form class="form">
+                <h2>Verfify</h2>
+                <form class="form" method="post" action="/verify">
                     <div class="inputDiv">
-                        <label for="email">Otp</label>
-                        <input type="text" name="email" placeholder="Otp" class="input">
+                        <label for="otp">Otp</label>
+                        <input type="text" name="otp" placeholder="Enter Otp" class="input">
                     </div>
                     
                     <button class="submit">Proceed</button>
