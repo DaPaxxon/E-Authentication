@@ -4,7 +4,7 @@ const {User, validateUser}=require("../models/User");
 const bcrypt = require("bcrypt");
 
 
-const register_user = async (req, res, next) => {
+const register_user = async (req, res) => {
     try {
         const { email,
             username,
@@ -54,7 +54,7 @@ const register_user = async (req, res, next) => {
                                             phone,
                                             fullname
                                         }))(done);
-                                    res.status(200).json({ message: "User registered!", data: picked, error: null });
+                                    res.status(201).json({ message: "User registered!", data: picked, error: null });
                                 }
                             })
                         }
@@ -70,6 +70,52 @@ const register_user = async (req, res, next) => {
 }
 
 
+
+
+
+const login_user_post = async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    try {
+        const user= await User.findOne({ email: email });
+        if (user) {
+            bcrypt.compare(password, user.password)
+                .then(function (result) {
+                    if (result === true) {
+                        req.session.userId=user._id;
+                        res.status(200).json({message: "Logged in", data: "/dashboard", error: null})
+                    } else  {
+                        res.status(403).json({message: null, data: null, error: "Password Incorrect"})
+                    }
+                })
+                .catch((err) => {
+                    res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+                })
+        } else {
+            res.status(400).json({ message: null, data: null, error: "No user with that email" })
+        }
+    } catch (e) {
+        res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+    }
+}
+
+
+
+const logout_get=(req, res)=>{
+    
+    req.session.destroy((err)=>{
+        if(err){
+            res.status(500).render("Error", {errorTxt: "Server Error"});;
+        }
+        else{
+                res.redirect("/")
+        }
+    })
+};
+
 module.exports = {
-    register_user
+    register_user,
+    login_user_post,
+    logout_get
 }

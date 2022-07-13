@@ -36,7 +36,7 @@ app.use(session({
     
     saveUninitialized: false,
     cookie: {
-        expires: 1000*60*60*3
+        expires: 1000*60*5 //5minutes
     },
     store: MongoStore.create({
         mongoUrl
@@ -53,6 +53,17 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+
+
+
+const middleware = require("./middleware/authMiddleware");
+//check if there is a user logged in.
+//if there is, update cookie
+
+app.use(middleware.shouldUpdateCookie)
+
+
+
 
 const pagesRoute = require("./routes/pages.routes");
 const authRoute = require("./routes/auth.routes");
