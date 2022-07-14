@@ -43,7 +43,18 @@ label{
     border-radius: 5px;
     color: #fff;
 }
-
+.successMessage{
+    display: flex;
+    margin-top: 2px;
+    font-weight: 700;
+    color: green
+}
+.errorMessage{
+    display: flex;
+    margin-top: 2px;
+    font-weight: 700;
+    color: red
+}
 
 
 

@@ -15,6 +15,9 @@
         <div id="main">
             <div class="mainContent">
                 <h2>LOGIN</h2>
+                <% if(message){ %> 
+                    <span class="successMessage"><%=message%></span>
+                <%}%>
                 <form class="form" method="post" action="/login">
                     <div class="inputDiv">
                         <label for="email">Email</label>
@@ -35,8 +38,12 @@
                         <input type="checkbox" name="otp" id="otp" class="checkbox">
                     </div>
                     </div>
+                    
                     <button class="submit">Proceed</button>
                 </form>
+                <% if(error){ %> 
+                    <span class="errorMessage"><%=error%></span>
+                <%}%>
             </div>
         </div>
     </div>

@@ -31,6 +31,7 @@
                 </div>
             </div>
             <div class="menuList">
+                <% if(!data){ %> 
                 <a href="/login" class="menuLink">
                     <div class="aMenu">
                         <div class="menuIcon">
@@ -52,6 +53,34 @@
                         </div>
                     </div>
                 </a>
+                <% } %> 
+                <%if(data){%>
+                    <% if(data.email&&data.username){ %> 
+                        <a href="/logout" class="menuLink">
+                            <div class="aMenu">
+                            
+                                <div class="menuIcon">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                </div>
+                                <div class="menuText">
+                                    Logout
+                                </div>
+                            </div>
+                        </a>
+                    <% }else if(data.otp){ %> 
+                        <a href="/verify" class="menuLink">
+                            <div class="aMenu">
+                            
+                                <div class="menuIcon">
+                                    <i class="bi bi-key-fill"></i>
+                                </div>
+                                <div class="menuText">
+                                    Verify
+                                </div>
+                            </div>
+                        </a>
+                    <% } %> 
+                <% } %> 
             </div>
         </div>
     </div>

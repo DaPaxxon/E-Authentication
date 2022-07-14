@@ -31,9 +31,25 @@ const requireAuth = async (req, res, next) => {
     try {
         const user = await User.findById(req.session.userId)
         if (user) {
+            res.locals.user=user
             next()
         } else {
             res.status(403).redirect("/login");
+        }
+    } catch (e) {
+        res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+    }
+
+}
+
+
+const redirectToDashboard = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.session.userId)
+        if (user) {
+            res.status(302).redirect("/dashboard");
+        } else {
+            next();
         }
     } catch (e) {
         res.status(500).json({ message: null, data: null, error: "Something went wrong" })
@@ -46,5 +62,6 @@ const requireAuth = async (req, res, next) => {
 
 module.exports = {
     shouldUpdateCookie,
-    requireAuth
+    requireAuth,
+    redirectToDashboard
 }

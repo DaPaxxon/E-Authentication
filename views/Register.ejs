@@ -16,6 +16,9 @@
             <h1>New Registration</h1>
             <div class="mainContent">
                 <h2>Enter New User Details</h2>
+                <% if(message){ %> 
+                    <span class="successMessage"><%=message%></span>
+                <%}%>
                 <form class="form" action="/register" method="post">
                     <div class="inputDiv">
                         <label for="fullname">Full Name</label>
@@ -43,6 +46,9 @@
                     </div>
                     <button class="submit">Register</button>
                 </form>
+                <% if(error){ %> 
+                    <span class="errorMessage"><%=error%></span>
+                <%}%>
             </div>
         </div>
     </div>

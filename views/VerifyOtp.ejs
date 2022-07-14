@@ -15,6 +15,9 @@
         <div id="main">
             <div class="mainContent">
                 <h2>Verfify</h2>
+                <% if(message){ %> 
+                    <span class="successMessage"><%=message%></span>
+                <%}%>
                 <form class="form" method="post" action="/verify">
                     <div class="inputDiv">
                         <label for="otp">Otp</label>
@@ -23,6 +26,9 @@
                     
                     <button class="submit">Proceed</button>
                 </form>
+                <% if(error){ %> 
+                    <span class="errorMessage"><%=error%></span>
+                <%}%>
             </div>
         </div>
     </div>

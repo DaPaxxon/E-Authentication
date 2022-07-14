@@ -30,22 +30,22 @@ const register_user = async (req, res) => {
             };
 
             if (oldUsername || oldEmail) {
-                res.status(400).json({ message: null, data: null, error: "Username or email already exists" })
+                res.status(400).render("Register", { message: null, data: null, error: "Username or email already exists" })
             } else {
                 const validateStatus = validateUser(newUserDetails);
 
                 if (validateStatus.error) {
-                    res.status(400).json({message: null, data: null, error: `${validateStatus.error.details[0].context.label}` });
+                    res.status(400).render("Register", {message: null, data: null, error: `${validateStatus.error.details[0].context.label}` });
                 } else {
                     bcrypt.hash(password, 10, function (error, hash) {
                         if (error) {
-                            res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+                            res.status(500).render("Register", { message: null, data: null, error: "Something went wrong" })
                         } else {
                             const user = new User({ ...newUserDetails, password: hash });
     
                             user.save((err, done) => {
                                 if (err) {
-                                    res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+                                    res.status(500).render("Register", { message: null, data: null, error: "Something went wrong" })
                                 } else {
                                     const picked = (({
                                         email,
@@ -57,7 +57,7 @@ const register_user = async (req, res) => {
                                             phone,
                                             fullname
                                         }))(done);
-                                    res.status(201).json({ message: "User registered!", data: picked, error: null });
+                                    res.status(201).render("Register", { message: "User registered! Please login", data: picked, error: null });
                                 }
                             })
                         }
@@ -65,10 +65,10 @@ const register_user = async (req, res) => {
                 }
             }
         } else {
-            res.status(400).json({ message: null, data: null, error: "Passwords does not match" })
+            res.status(400).render("Register", { message: null, data: null, error: "Passwords does not match" })
         }
     } catch (e) {
-        res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+        res.status(500).render("Register", { message: null, data: null, error: "Something went wrong" })
     }
 }
 
@@ -83,10 +83,10 @@ const saveOtp = (user, req, res) => {
 
     otp.save((err, saved) => {
         if (err) {
-            res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+            res.status(500).render("Login", { message: null, data: null, error: "Something went wrong" })
         } else {
             req.session.userEmail=user.email;
-            res.status(201).json({ message: "User otp sent", data: saved.otp, error: null })
+            res.status(201).render("Login", { message: "User otp sent", data: saved, error: null })
         }
     })
 }
@@ -101,13 +101,13 @@ const genOtp = async (user, req, res)=>{
             if (deleteOldOtp) {
                 saveOtp(user, req, res)
             } else {
-                res.status(500).json({ message: null, data: null, error: "We could not generate a new otp. Please try later" })
+                res.status(500).render("Login", { message: null, data: null, error: "We could not generate a new otp. Please try later" })
             }
         } else {
             saveOtp(user, req, res)
         }
     } catch (e) {
-        res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+        res.status(500).render("Login", { message: null, data: null, error: "Something went wrong" })
     }
     
 }
@@ -126,17 +126,17 @@ const login_user_post = async (req, res) => {
 
                         genOtp(user, req, res);
                     } else  {
-                        res.status(403).json({message: null, data: null, error: "Password Incorrect"})
+                        res.status(403).render("Login", {message: null, data: null, error: "Password Incorrect"})
                     }
                 })
                 .catch((err) => {
-                    res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+                    res.status(500).render("Login", { message: null, data: null, error: "Something went wrong" })
                 })
         } else {
-            res.status(400).json({ message: null, data: null, error: "No user with that email" })
+            res.status(400).render("Login", { message: null, data: null, error: "No user with that email" })
         }
     } catch (e) {
-        res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+        res.status(500).render("Login", { message: null, data: null, error: "Something went wrong" })
     }
 }
 
@@ -150,16 +150,16 @@ const verify_post = async (req, res) => {
             const deleteOtp = await Otp.findByIdAndDelete(otpVerified._id)
             if (deleteOtp) {
                 req.session.userId=deleteOtp.userId;
-                res.status(200).json({message: "Logged in", data: "/dashboard", error: null})
+                res.status(200).redirect("/dashboard")
             } else {
-                res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+                res.status(500).render("VerifyOtp", { message: null, data: null, error: "Something went wrong" })
             }
             
         } else {
-            res.status(403).json({ message: null, data: null, error: "Otp incorrect" })
+            res.status(403).render("VerifyOtp", { message: null, data: null, error: "Otp incorrect" })
         }
     } catch (e) {
-        res.status(500).json({ message: null, data: null, error: "Something went wrong" })
+        res.status(500).render("VerifyOtp", { message: null, data: null, error: "Something went wrong" })
     }
 }
 

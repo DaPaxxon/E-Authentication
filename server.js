@@ -36,7 +36,7 @@ app.use(session({
     
     saveUninitialized: false,
     cookie: {
-        expires: 1000*60*5 //5minutes
+        expires: 1000*60*30 //30minutes
     },
     store: MongoStore.create({
         mongoUrl
