@@ -18,3 +18,25 @@ for (let i = 0; i < navRightArrows.length; i++){
         navRightArrows[i].style.display = "flex";
     });
 }
+
+
+
+//for closing and opening
+let menuOpen = false;
+
+const theMenu = document.querySelector("#menu");
+const hamburger = document.querySelector("#hamburger");
+
+hamburger.addEventListener("click", () => {
+    menuOpen = !menuOpen
+    if(menuOpen===true){
+        theMenu.style.display="block"
+    } else {
+        theMenu.style.display="none"
+    }
+})
+
+
+
+
+
