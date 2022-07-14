@@ -10,6 +10,7 @@ pagesRoute.get("/login", middleware.redirectToDashboard, pages.loginPage)
 pagesRoute.get("/register", middleware.redirectToDashboard, pages.registerPage)
 pagesRoute.get("/verify", middleware.redirectToDashboard, pages.verifyOtpPage)
 pagesRoute.get("/dashboard", middleware.requireAuth, pages.dashboardPage)
+pagesRoute.get("/users", middleware.requireAuth, pages.allUsersPage)
 
 
 module.exports=pagesRoute
