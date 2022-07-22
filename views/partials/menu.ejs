@@ -55,7 +55,6 @@
                 </a>
                 <% } %> 
                 <%if(data){%>
-                    <% if(data.email&&data.username){ %> 
                         <a href="/dashboard" class="menuLink">
                             <div class="aMenu">
                             
@@ -67,6 +66,42 @@
                                 </div>
                             </div>
                         </a>
+                        <a href="/confirm-payment" class="menuLink">
+                            <div class="aMenu">
+                            
+                                <div class="menuIcon">
+                                    <i class="bi bi-person-bounding-box"></i>
+                                </div>
+                                <div class="menuText">
+                                    Confirm Payment
+                                </div>
+                            </div>
+                        </a>
+                        <br/>
+                        <a href="/course-registration" class="menuLink">
+                            <div class="aMenu">
+                            
+                                <div class="menuIcon">
+                                    <i class="bi bi-person-bounding-box"></i>
+                                </div>
+                                <div class="menuText">
+                                    Register Course
+                                </div>
+                            </div>
+                        </a>
+                        <br/>
+                        <a href="/add-course" class="menuLink">
+                            <div class="aMenu">
+                            
+                                <div class="menuIcon">
+                                    <i class="bi bi-person-bounding-box"></i>
+                                </div>
+                                <div class="menuText">
+                                    Add Course
+                                </div>
+                            </div>
+                        </a>
+                        <br/>
                         <a href="/users" class="menuLink">
                             <div class="aMenu">
                             
@@ -89,19 +124,6 @@
                                 </div>
                             </div>
                         </a>
-                    <% }else if(data.otp){ %> 
-                        <a href="/verify" class="menuLink">
-                            <div class="aMenu">
-                            
-                                <div class="menuIcon">
-                                    <i class="bi bi-key-fill"></i>
-                                </div>
-                                <div class="menuText">
-                                    Verify
-                                </div>
-                            </div>
-                        </a>
-                    <% } %> 
                 <% } %> 
             </div>
         </div>

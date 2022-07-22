@@ -67,9 +67,11 @@ app.use(middleware.shouldUpdateCookie)
 
 const pagesRoute = require("./routes/pages.routes");
 const authRoute = require("./routes/auth.routes");
+const coursesRoute = require("./routes/courses.routes");
 const deleteRoute = require("./routes/delete.routes");
 
 
 app.use("/", pagesRoute)
 app.use("/", authRoute)
+app.use("/", coursesRoute)
 app.use("/delete", deleteRoute)

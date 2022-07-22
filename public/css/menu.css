@@ -105,6 +105,9 @@
     display: flex;
     color: inherit;
 }
+.menuLink:hover{
+    text-decoration: none;
+}
 .aMenu{
     display: flex;
     flex-direction: row;

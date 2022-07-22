@@ -1,8 +1,8 @@
-const { v4: uuidv4 } = require('uuid');
+
 const bcrypt = require("bcrypt");
 
 const {User, validateUser}=require("../models/User");
-const Otp=require("../models/Otp");
+
 
 
 
@@ -73,44 +73,7 @@ const register_user = async (req, res) => {
 }
 
 
-const saveOtp = (user, req, res) => {
-    let code = uuidv4();
-    let otp = new Otp({
-        otp: code,
-        email: user.email,
-        userId: user._id
-    })
 
-    otp.save((err, saved) => {
-        if (err) {
-            res.status(500).render("Login", { message: null, data: null, error: "Something went wrong" })
-        } else {
-            req.session.userEmail=user.email;
-            res.status(201).render("Login", { message: "User otp sent", data: saved, error: null })
-        }
-    })
-}
-
-const genOtp = async (user, req, res)=>{
-    
-    try {
-        const oldOtp = await Otp.findOne({ email: user.email })
-        
-        if (oldOtp) {
-            const deleteOldOtp = await Otp.findByIdAndDelete(oldOtp._id);
-            if (deleteOldOtp) {
-                saveOtp(user, req, res)
-            } else {
-                res.status(500).render("Login", { message: null, data: null, error: "We could not generate a new otp. Please try later" })
-            }
-        } else {
-            saveOtp(user, req, res)
-        }
-    } catch (e) {
-        res.status(500).render("Login", { message: null, data: null, error: "Something went wrong" })
-    }
-    
-}
 
 const login_user_post = async (req, res) => {
     const email = req.body.email;
@@ -124,7 +87,9 @@ const login_user_post = async (req, res) => {
                     if (result === true) {
                        
 
-                        genOtp(user, req, res);
+                        //genOtp(user, req, res);
+                        req.session.userId = user._id;
+                        res.status(200).redirect("/dashboard")
                     } else  {
                         res.status(403).render("Login", {message: null, data: null, error: "Password Incorrect"})
                     }
@@ -137,29 +102,6 @@ const login_user_post = async (req, res) => {
         }
     } catch (e) {
         res.status(500).render("Login", { message: null, data: null, error: "Something went wrong" })
-    }
-}
-
-
-
-
-const verify_post = async (req, res) => {
-    try {
-        const otpVerified = await Otp.findOne({ otp: req.body.otp, email: req.session.userEmail })
-        if (otpVerified) {
-            const deleteOtp = await Otp.findByIdAndDelete(otpVerified._id)
-            if (deleteOtp) {
-                req.session.userId=deleteOtp.userId;
-                res.status(200).redirect("/dashboard")
-            } else {
-                res.status(500).render("VerifyOtp", { message: null, data: null, error: "Something went wrong" })
-            }
-            
-        } else {
-            res.status(403).render("VerifyOtp", { message: null, data: null, error: "Otp incorrect" })
-        }
-    } catch (e) {
-        res.status(500).render("VerifyOtp", { message: null, data: null, error: "Something went wrong" })
     }
 }
 
@@ -183,6 +125,5 @@ const logout_get=(req, res)=>{
 module.exports = {
     register_user,
     login_user_post,
-    verify_post,
     logout_get
 }

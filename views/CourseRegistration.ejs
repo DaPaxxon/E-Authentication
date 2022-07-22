@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/menu.css">
+    <link rel="stylesheet" href="/public/css/topMenu.css">
+    <link rel="stylesheet" href="/public/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/public/css/table-courses.css">
+    <title>E Authentication</title>
+</head>
+<body>
+    <div id="fullBody">
+        <%-include("./partials/menu.ejs")%>
+        <div id="coverBody"> 
+            <%-include("./partials/topMenu.ejs")%>
+            <div id="main">
+                <h1>Register Courses</h1>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr class="table-primary">
+                            <th scope="col">Course Title</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Unit</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Session</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Semester</th>
+                            <th scope="col">Register</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(data.courses){ %> 
+                                <% data.courses.forEach((course)=>{%>
+                                    <tr>
+                                        <th scope="row"><%=course.title%></th>
+                                        <td><%=course.code%></td>
+                                        <td><%=course.unit%></td>
+                                        <td><%=course.type%></td>
+                                        <td><%=course.session%></td>
+                                        <td><%=course.level%></td>
+                                        <td><%=course.semester%></td>
+                                        <td><input type="checkbox"></td>
+                                        </tr>
+                                        <tr>
+                                <% }) %> 
+                            
+                                <% } %> 
+                            <tr>
+                            <th scope="row">Data Communication And Network II</th>
+                            <td>CSC416</td>
+                            <td>2</td>
+                            <td>CORE</td>
+                            <td>2021/2022</td>
+                            <td>400</td>
+                            <td>Second Semester</td>
+                            <td><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                            <th scope="row">Data Communication And Network II</th>
+                            <td>CSC416</td>
+                            <td>2</td>
+                            <td>CORE</td>
+                            <td>2021/2022</td>
+                            <td>400</td>
+                            <td>Second Semester</td>
+                            <td><input type="checkbox"></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/public/js/menu.js"></script>
+    <script type="text/javascript" src="/public/js/deleteUser.js"></script>
+
+    <% if(error){%>
+        <script type="text/javascript">
+            alert("<%= error %> ")
+        </script>
+    <% } %> 
+</body>
+</html>

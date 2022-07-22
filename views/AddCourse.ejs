@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/menu.css">
+    <link rel="stylesheet" href="/public/css/topMenu.css">
+    <link rel="stylesheet" href="/public/css/register.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <title>E Authentication</title>
+</head>
+<body>
+    <div id="fullBody">
+        <%-include("./partials/menu.ejs")%>
+        <div id="coverBody"> 
+            <%-include("./partials/topMenu.ejs")%>
+            <div id="main">
+                <div class="mainContent">
+                    <h2>Add Courses</h2>
+                    <% if(message){ %> 
+                        <span class="successMessage"><%=message%></span>
+                    <%}%>
+                    <form class="form" method="post" action="/add-course">
+                        <div class="inputDiv">
+                            <label for="title">Course Title</label>
+                            <input type="text" name="title" placeholder="Enter Course Title" class="input" required>
+                        </div>
+                        <div class="inputDiv">
+                            <label for="code">Course Code</label>
+                            <input type="text" name="code" placeholder="Enter Course Code" class="input" required>
+                        </div>
+                        <div class="inputDiv">
+                            <label for="unit">Course Unit</label>
+                            <input type="number" name="unit" placeholder="Enter Course Unit" class="input" required>
+                        </div>
+                        <div class="inputDiv">
+                            <label for="type">Course Type</label>
+                            <input type="text" name="type" placeholder="Enter Course Type" class="input" required>
+                        </div>
+                        <div class="inputDiv">
+                            <label for="session">Course Session</label>
+                            <input type="text" name="session" placeholder="Enter Course Session" class="input" required>
+                        </div>
+                        <div class="inputDiv">
+                            <label for="level">Course Level</label>
+                            <input type="number" name="level" placeholder="Enter Course Level" class="input" required>
+                        </div>
+                        <div class="inputDiv">
+                            <label for="semester">Course Semester</label>
+                            <input type="text" name="semester" placeholder="Enter Course Semester" class="input" required>
+                        </div>
+                        
+                        
+                        <button class="submit">Proceed</button>
+                    </form>
+                    <% if(error){ %> 
+                        <span class="errorMessage"><%=error%></span>
+                    <%}%>
+
+
+
+                    
+                </div>
+                <!--Course List-->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr class="table-primary">
+                            <th scope="col">Course Title</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Unit</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Session</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Semester</th>
+                            <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(data.courses){ %> 
+                                <% data.courses.forEach((course)=>{%>
+                                    <tr>
+                                        <th scope="row"><%=course.title%></th>
+                                        <td><%=course.code%></td>
+                                        <td><%=course.unit%></td>
+                                        <td><%=course.type%></td>
+                                        <td><%=course.session%></td>
+                                        <td><%=course.level%></td>
+                                        <td><%=course.semester%></td>
+                                        <td><a href="/del-course/<%=course._id%>">DELETE</a></td>
+                                        </tr>
+                                        <tr>
+                                <% }) %> 
+                            
+                                <% } %> 
+                            <th scope="row">Data Communication And Network II</th>
+                            <td>CSC416</td>
+                            <td>2</td>
+                            <td>CORE</td>
+                            <td>2021/2022</td>
+                            <td>400</td>
+                            <td>Second Semester</td>
+                            </tr>
+                            <tr>
+                            <th scope="row">Data Communication And Network II</th>
+                            <td>CSC416</td>
+                            <td>2</td>
+                            <td>CORE</td>
+                            <td>2021/2022</td>
+                            <td>400</td>
+                            <td>Second Semester</td>
+                            </tr>
+                            
+                        </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/public/js/menu.js"></script>
+    <script type="text/javascript" src="/public/js/login.js"></script>
+</body>
+</html>
