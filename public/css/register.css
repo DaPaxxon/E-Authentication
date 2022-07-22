@@ -42,6 +42,7 @@ label{
     border: none;
     border-radius: 5px;
     color: #fff;
+    cursor: pointer;
 }
 .successMessage{
     display: flex;
